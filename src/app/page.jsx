@@ -7,7 +7,12 @@ export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [discussionForm, setDiscussionForm] = useState(true);
   const [stories, setStories] = useState(true);
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1000);
+  const [isLargeScreen, setIsLargeScreen] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.innerWidth >= 1000;
+    }
+    return false; // Default value when window is not available
+  });
 
   useEffect(() => {
     function handleResize() {
